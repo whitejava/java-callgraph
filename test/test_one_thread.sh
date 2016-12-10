@@ -7,3 +7,6 @@ java -javaagent:javacg-0.1-SNAPSHOT-dycg-agent.jar="incl=gr.gousiosg.javacg.test
 echo ------------------------
 echo Call trace is:
 cat calltrace.json
+echo ------------------------
+echo To xmind:
+python3 ../process/to_xmind.py calltrace.json
