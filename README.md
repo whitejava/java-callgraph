@@ -1,6 +1,5 @@
 
 java-callgraph: Java Call Graph Utilities
-=========================================
 
 # 项目背景
 
