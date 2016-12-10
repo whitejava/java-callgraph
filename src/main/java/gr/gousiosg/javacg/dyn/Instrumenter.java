@@ -43,6 +43,8 @@ import javassist.ClassPool;
 import javassist.CtBehavior;
 import javassist.CtClass;
 import javassist.NotFoundException;
+import javassist.expr.ExprEditor;
+import javassist.expr.MethodCall;
 
 public class Instrumenter implements ClassFileTransformer {
 
@@ -169,9 +171,8 @@ public class Instrumenter implements ClassFileTransformer {
 
         if (method.getName().equals(name))
             methodName = "<init>";
-
         method.insertBefore(String.format("gr.gousiosg.javacg.dyn.CallTrace.push(\"%s\",\"%s\");", className, methodName));
-        method.insertAfter("gr.gousiosg.javacg.dyn.CallTrace.pop();");
+        method.insertAfter("gr.gousiosg.javacg.dyn.CallTrace.pop();", true);
     }
 
     private static void err(String msg) {
