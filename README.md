@@ -1,5 +1,34 @@
+
 java-callgraph: Java Call Graph Utilities
 =========================================
+
+# 项目背景
+
+笔者试图阅读一些开源项目的源码，发现几个问题：
+
+- 代码量过于庞大，不知从何看起。
+- 一行行阅读代码无法看到整体结构。
+- 下断点一行行跟踪代码费事费力。
+
+此项目解决源码阅读问题，让您快速掌握软件的整体结构，帮助理解软件运行机制。
+
+# 使用方法
+
+先把代码拉下来，然后执行编译：
+
+<code>
+mvn package -DskipTests
+</code>
+
+这时产生一个文件`javacg-0.1-SNAPSHOT-dycg-agent.jar`，用于做JavaAgent。
+
+然后运行需要研究的项目，加上如下参数：
+
+<code>-javaagent:javacg-dycg-agent.jar="incl=mylib.*,mylib2.*,java.nio.*;excl=java.nio.charset.*"</code>
+
+运行完成后将会得到一个Xmind文件，用Xmind打开，就可以看到运行的整个过程。
+
+# 原始文档
 
 A suite of programs for generating static and dynamic call graphs in Java.
 
@@ -12,7 +41,7 @@ A suite of programs for generating static and dynamic call graphs in Java.
 
 #### Compile
 
-The java-callgraph package is build with maven. Install maven and do: 
+The java-callgraph package is build with maven. Install maven and do:
 
 <code>
 mvn install
