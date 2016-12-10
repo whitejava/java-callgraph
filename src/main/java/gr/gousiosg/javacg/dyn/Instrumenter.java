@@ -102,7 +102,7 @@ public class Instrumenter implements ClassFileTransformer {
     }
 
     public byte[] transform(ClassLoader loader, String className, Class clazz,
-            java.security.ProtectionDomain domain, byte[] bytes) {
+                            java.security.ProtectionDomain domain, byte[] bytes) {
         boolean enhanceClass = false;
 
         String name = className.replace("/", ".");
@@ -170,9 +170,8 @@ public class Instrumenter implements ClassFileTransformer {
         if (method.getName().equals(name))
             methodName = "<init>";
 
-        method.insertBefore("gr.gousiosg.javacg.dyn.MethodStack.push(\"" + className
-                + ":" + methodName + "\");");
-        method.insertAfter("gr.gousiosg.javacg.dyn.MethodStack.pop();");
+        method.insertBefore(String.format("gr.gousiosg.javacg.dyn.CallTrace.push(\"%s\",\"%s\");", className, methodName));
+        method.insertAfter("gr.gousiosg.javacg.dyn.CallTrace.pop();");
     }
 
     private static void err(String msg) {
